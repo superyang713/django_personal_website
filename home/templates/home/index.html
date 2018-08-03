@@ -1,18 +1,80 @@
-{% extends "home/base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+  <meta http-equiv="X-UA_Compatible" content="IE-edge, chrome=1">
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<title>Yang Dai</title>
+	<link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}">
+  <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'home/css/style.css' %}" rel="stylesheet">
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
 
-{% block header %}
-    <div id="jumbotron">
-        <h1>Track your learning.</h1>
+<header>
+<br><br>
+<div class="container" align="center">
+    <a rel="home" href="{% url 'home:index' %}" title="Yang Dai">
+      <img class="img-responsive" style="margin-top: -5px;" src="{% static 'home/images/yang_banner.png' %}">
+    </a>
+  </div>
+</header>
+
+<body>
+    <br><br>
+    <div class="container" align="center">
+        <a href="/financial-analysis/"><button type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-glass"></span> Chemistry
+        </button></a>
+        <a href="/political-analysis/"><button type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-console"></span> Programming
+        </button></a>
+        <a href="/geographical-analysis/"><button type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-globe"></span> Data Science
+        </button></a>
+
+    </div><br><br>
+
+    <div class="container" align="center">
+    <img style="max-width:100%;" src="{% static 'home/images/homepage_pic.png' %}">
     </div>
-{% endblock header %}
 
-{% block content %}
-<h2>
-    <a href=>Register an account</a> to make your
-    own Learning Log, and list the topics you're learning about.
-</h2>
-<h2>
-    Whenever you learn something new about a topic, make an entry summarizing
-    what you've learned.
-</h2>
-{% endblock content %}
+</body>
+
+	<script>
+		function goBack() {
+			window.history.back()
+		}
+	</script>
+			<!--<script src="http://code.highcharts.com/highcharts.js"></script>
+			<script src="/static/graph.js"></script>-->
+
+<div class="footer-container" style="background-color: #ececec">
+	<div class="border-row" style="width:100%; margin-bottom: 15px;"> </div>
+  <footer class="container-fluid text-center">
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Contact Me</h3><br>
+        <p>Phone: 617-253-6964 (office)</p>
+        <p>Email: daiy@mit.edu</p>
+        <p>Address: Vassar Street, 6-128<br>Cambridge<br>MA 02139</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Connect</h3>
+        <a href="https://www.linkedin.com/in/yang-dai-74091741" class="fa fa-linkedin"></a>
+        <a href="https://github.com/superyang713" class="fa fa-github"></a>
+        <a href="{% static 'resume/images/wechat.jpg' %}" class="fa fa-wechat"></a>
+        </div>
+      <div class="col-sm-4">
+        <h3>My Wife's Work</h3><br>
+        <a href="http://mannasunevents.com"><img src="{% static 'homepage/images/base_manna_logo.png' %}"></a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+</html>
