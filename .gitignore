@@ -4,9 +4,6 @@
 __pycache__
 .DS_Store
 .env
-QR.png
-wechat_api.pyc
 geckodriver.log
 build/
 dist/
-static/
