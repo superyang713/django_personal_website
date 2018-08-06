@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # My apps
     'home',
     'lab',
+    'blog',
 
     # Thrid party app
     'bootstrap3',

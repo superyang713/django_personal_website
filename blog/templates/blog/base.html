@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA_Compatible" content="IE-edge, chrome=1">
+  <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+
+  <title>Yang's Blog</title>
+  <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+  <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?subset=latin,cyrillic-ext,latin-ext,cyrillic&amp;family=Open+Sans+Condensed:300%7CMerriweather:400,300,300italic,400italic,700,700italic%7CRoboto+Slab:400,300">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css">
+
+  <style type="text/css"> a, a:visited {color: #1215a9;} </style>
+
+</head>
+<body class="tag-template tag-technical-blogs">
+
+  <header id="site-head">
+    <h1 class="blog-title"><a href="{% url 'home:index' %}">Yang's Blog</a></h1>
+    <h1 class="blog-subtitle">Awesome stuff I have come across</h1>
+  </header>
+
+{% block content %}
+{% endblock %}
+
+</body>
+
+<footer class="site-footer">
+  <div class="inner">
+    <section class="footer-social">
+      <a href="{% static 'home/images/wechat.jpg' %}" target="_blank" rel="noopener" title="Wechat"><i class="fa fa-2x fa-fw fa-wechat"></i> <span class="hidden">Twitter</span></a>
+      <a href="https://www.linkedin.com/in/yangdai713" target="_blank" rel="noopener" title="Linkedin"><i class="fa fa-2x fa-fw fa-linkedin"></i> <span class="hidden">RSS</span></a>
+      <a href="https://github.com/superyang713" target="_blank" rel="noopener" title="Github"><i class="fa fa-2x fa-fw fa-github"></i> <span class="hidden">Github</span></a>
+    </section>
+    <section class="footer-author">A blog by Yang Dai</section>
+    <section class="copyright">© 2018 <a href="http://www.yangdai.info">Yang's Blog</a>. All rights reserved</section>
+  </div>
+</footer>
+</html>
