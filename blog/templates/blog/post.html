@@ -3,13 +3,13 @@
 <main class="content" role="main">
   <article class="preview">
     <header>
-        <h1 class="post-title">{{ post.title }}</h1>
-        <div class="post-meta">
-          {{ post.date_added|date:'M d, Y H:i' }}
-        </div>
-        {% autoescape off %}
-          <p>{{ post.text }}</p>
-        {% endautoescape %}
+      <h1 class="post-title">{{ post.title }}</h1>
+      <div class="post-meta">
+        {{ post.date_added|date:'M d, Y H:i' }}
+      </div>
+      {% autoescape off %}
+        <p>{{ post.text }}</p>
+      {% endautoescape %}
     </header>
   </article>
 </main>
