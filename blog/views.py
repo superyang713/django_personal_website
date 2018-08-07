@@ -1,16 +1,8 @@
-from django.shortcuts import render, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Post
 
-# Function based view:
-#def post(request, post_id):
-    #post = Post.objects.get(id=post_id)
-    #context = {'post': post}
-    #return render(request, 'blog/post_detail.html', context)
 
-
-# I decide to use class based views for my site.
 class PostListView(ListView):
     model = Post
     paginate_by = 100
@@ -24,9 +16,11 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
-    pk_url_kwarg = 'post_id'    #pass the url post_id to the class so query can be done.
+
+    # pass the url post_id to the class so query can be done.
+    slug_url_kwarg = 'slug'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['post'] = Post.objects.get(pk=self.kwargs['post_id'])
+        context['post'] = Post.objects.get(pk=self.kwargs['slug'])
         return context

@@ -16,6 +16,7 @@ class Post(models.Model):
     body = models.TextField()
     tags = models.ManyToManyField(Tag, related_name='posts')
     date_added = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=140, unique=True)
 
     class Meta:
         verbose_name_plural = 'posts'
@@ -25,4 +26,4 @@ class Post(models.Model):
 
     # Admin view on site.
     def get_absolute_url(self):
-        return reverse('blog:post_detail', kwargs={'post_id': self.id})
+        return reverse('blog:post_detail', kwargs={'slug': self.slug})
