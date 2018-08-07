@@ -8,7 +8,7 @@
         {{ post.date_added|date:'M d, Y H:i' }}
       </div>
       {% autoescape off %}
-        <p>{{ post.text }}</p>
+        <p>{{ post.body }}</p>
       {% endautoescape %}
     </header>
   </article>

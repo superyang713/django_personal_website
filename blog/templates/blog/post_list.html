@@ -11,7 +11,7 @@
         {% autoescape off %}
           <p>{{ post }}</p>
         {% endautoescape %}
-        <p class="readmore"><a href="{% url 'blog:post_detail' post.id %}">Keep reading <i class="fa fa-angle-double-right" style="padding-left: 5px;"></i></a></p>
+        <p class="readmore"><a href="{{ post.get_absolute_url }}">Keep reading <i class="fa fa-angle-double-right" style="padding-left: 5px;"></i></a></p>
       {% endfor %}
     </header>
   </article>
