@@ -9,7 +9,7 @@
           {{ post.date_added|date:'M d, Y H:i' }}
         </div>
         {% autoescape off %}
-          <p>{{ post }}</p>
+          <p>{{ post.body|truncatewords:50 }}</p>
         {% endautoescape %}
         <p class="readmore"><a href="{{ post.get_absolute_url }}">Keep reading <i class="fa fa-angle-double-right" style="padding-left: 5px;"></i></a></p>
       {% endfor %}
