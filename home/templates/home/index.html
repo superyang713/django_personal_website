@@ -4,7 +4,7 @@
 <body>
     <br><br>
     <div class="container" align="center">
-        <a href="#"><button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-globe"></span> About Me </button></a>
+        <a href="{% url 'home:about' %}"><button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-globe"></span> About Me </button></a>
         <a href="{% url 'lab:pressure_monitor' %}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-glass">lab stuff</span></button></a>
         <a href="{% url 'blog:index' %}"><button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-console"></span> Blog </button></a>
     </div>
