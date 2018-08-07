@@ -1,14 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from .models import Post
 
+# Function based view:
+#def post(request, post_id):
+    #post = Post.objects.get(id=post_id)
+    #context = {'post': post}
+    #return render(request, 'blog/post_detail.html', context)
 
-def index(request):
-    posts = Post.objects.order_by('date_added')
-    context = {'posts': posts}
-    return render(request, 'blog/index.html', context)
+
+# I decide to use class based views for my site.
+class PostListView(ListView):
+    model = Post
+    paginate_by = 100
+    template_name = 'blog/post_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.all().order_by('date_added')
+        return context
 
 
-def post(request, post_id):
-    post = Post.objects.get(id=post_id)
-    context = { 'post': post }
-    return render(request, 'blog/post.html', context)
+class PostDetailView(DetailView):
+    model = Post
+    pk_url_kwarg = 'post_id'    #pass the url post_id to the class so query can be done.
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post'] = Post.objects.get(pk=self.kwargs['post_id'])
+        return context
