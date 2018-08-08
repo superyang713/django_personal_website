@@ -7,12 +7,12 @@ from .models import Post
 class PostNewForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('author', 'title', 'body')
+        fields = ('title', 'body')
 
     # Override save method to implement auto-prepopulate slugfield.
-    def save(self):
+    def save(self, commit=True):
         instance = super(PostNewForm, self).save(commit=False)
         instance.slug = slugify(instance.title)
-        instance.save()
-
+        if commit:
+            instance.save()
         return instance
