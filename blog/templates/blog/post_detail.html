@@ -5,8 +5,7 @@
     <header>
       <h1 class="post-title">{{ post.title }}</h1>
       <div class="post-meta">
-      <p>published: {{ post.published_date|date:'M d, Y H:i' }}</p>
-
+        <p>published: {{ post.published_date|date:'M d, Y H:i' }}</p>
       </div>
       {% autoescape off %}
         <p>{{ post.body }}</p>

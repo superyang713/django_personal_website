@@ -4,6 +4,7 @@ from django.views.generic.edit import FormView
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 
 
 from .models import Post
@@ -17,7 +18,7 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.all().order_by('date_added')
+        context['posts'] = Post.objects.all().order_by('published_date')
         return context
 
 
@@ -42,22 +43,5 @@ def post_new(request):
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.author = request.user
-            new_post.save()
+            new_post.publish()
             return HttpResponseRedirect(reverse('blog:post_list'))
-
-
-#class SubmitPostView(FormView):
-#    template_name = 'blog/post_new.html'
-#    form_class = PostForm
-#    success_url = reverse_lazy('blog:post_list')
-#
-#    def get(self, request, *args, **kwargs):
-#        context = self.get_context_data(**kwargs)
-#        context['form'] = self.form_class
-#        return self.render_to_response(context)
-#
-#    def post(self, request, *args, **kwargs):
-#        form = self.form_class(request.POST)
-#        if form.is_valid():
-#            self.object = form.save()
-#            return reverse('blog:post_list')
