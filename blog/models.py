@@ -1,13 +1,19 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     body = models.TextField()
-    date_added = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
     slug = models.SlugField(max_length=140, unique=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
 
     class Meta:
         verbose_name_plural = 'posts'

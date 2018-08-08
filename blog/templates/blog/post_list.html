@@ -6,7 +6,7 @@
       {% for post in posts %}
         <h1 class="post-title"><a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a></h1>
         <div class="post-meta">
-          {{ post.date_added|date:'M d, Y H:i' }}
+          <p>published: {{ post.published_date|date:'M d, Y H:i' }}</p>
         </div>
         {% autoescape off %}
           <p>{{ post.body|truncatewords:50 }}</p>
