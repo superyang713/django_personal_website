@@ -1,6 +1,13 @@
 {% extends "blog/base.html" %}
 {% block content %}
 <main class="content" role="main">
+
+{% if user.is_superuser %}
+    <p>Hello, admin.</p>
+{% else %}
+    <p>Hello, ordinary visitor.</p>
+{% endif %}
+
   <article class="preview">
     <header>
       <h1 class="post-title">{{ post.title }}</h1>

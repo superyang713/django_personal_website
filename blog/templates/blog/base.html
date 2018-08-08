@@ -1,3 +1,4 @@
+{% load bootstrap3 %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,7 @@
   <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}">
   <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
   <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+  {% bootstrap_css %}
 
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?subset=latin,cyrillic-ext,latin-ext,cyrillic&amp;family=Open+Sans+Condensed:300%7CMerriweather:400,300,300italic,400italic,700,700italic%7CRoboto+Slab:400,300">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css">
@@ -21,9 +23,7 @@
 
   <header id="site-head">
     <h1 class="blog-title"><a href="{% url 'home:index' %}">Yang's Blog</a></h1>
-    <h1 class="blog-subtitle">Awesome stuff I have come across</h1>
-  </header>
-
+    <h1 class="blog-subtitle">Awesome stuff I have come across<a class="blog-subtitle" href="{% url 'blog:post_new' %}">{% bootstrap_icon 'plus' %}</a></header></h1>
 {% block content %}
 {% endblock %}
 
