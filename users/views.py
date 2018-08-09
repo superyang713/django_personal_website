@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('learning_logs:index'))
+    return HttpResponseRedirect(reverse('blog:post_list'))
 
 
 def register(request):
@@ -24,4 +24,4 @@ def register(request):
                 password=request.POST['password1']
             )
             login(request, authenticated_user)
-            return HttpResponseRedirect(reverse('learning_logs:index'))
+            return HttpResponseRedirect(reverse('blog:post_list'))

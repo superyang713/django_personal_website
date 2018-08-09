@@ -1,7 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, get_object_or_404, redirect
-from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
 from blog.models import Post
@@ -19,7 +18,6 @@ class PostListView(ListView):
         return context
 
 
-@method_decorator(login_required, name='dispatch')
 class PostDetailView(DetailView):
     model = Post
     slug_url_kwarg = 'slug'

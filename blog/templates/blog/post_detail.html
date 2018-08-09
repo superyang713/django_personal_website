@@ -9,13 +9,9 @@
         <p>published: {{ post.created_date|date:'M d, Y H:i' }}</p>
         <p>Last Updated: {{ post.published_date|date:'M d, Y H:i' }}</p>
       </div>
-      {% if user.is_authenticated %}
-        <a class="btn btn-default" href="{% url 'blog:post_edit' post.slug %}">
-          {% bootstrap_icon 'edit' %}
-        </a>
-        <a class="btn btn-default" href="{% url 'blog:post_remove' post.slug %}">
-          {% bootstrap_icon 'remove' %}
-        </a>
+      {% if user.is_superuser %}
+        <a class="btn btn-default" href="{% url 'blog:post_edit' post.slug %}">{% bootstrap_icon 'edit' %}</a>
+        <a class="btn btn-default" href="{% url 'blog:post_remove' post.slug %}">{% bootstrap_icon 'remove' %}</a>
       {% endif %}
       {% autoescape off %}
         <p>{{ post.body }}</p>
