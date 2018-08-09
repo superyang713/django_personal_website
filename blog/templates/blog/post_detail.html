@@ -4,9 +4,11 @@
   <article class="preview">
     <header>
       <h1 class="post-title">{{ post.title }}</h1>
-      <div class="post-meta">
-        <p>published: {{ post.published_date|date:'M d, Y H:i' }}</p>
-      </div>
+      {% if post.published_date %}
+        <div class="post-meta">
+          {{ post.published_date|date:'M d, Y H:i' }}
+        </div>
+      {% endif %}
       {% autoescape off %}
         <p>{{ post.body }}</p>
       {% endautoescape %}
