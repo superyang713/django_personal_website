@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.text import slugify
 
-from .models import Post
+from blog.models import Post
 
 
 class PostNewForm(forms.ModelForm):

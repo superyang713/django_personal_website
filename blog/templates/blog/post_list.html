@@ -4,19 +4,20 @@
   <article class="preview">
     <header>
       {% for post in posts %}
-        <h1 class="post-title"><a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a></h1>
+        <h1 class="post-title">
+          <a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a>
+        </h1>
         <div class="post-meta">
-          <p>published: {{ post.published_date|date:'M d, Y H:i' }}</p>
+          <p>published: {{ post.created_date|date:'M d, Y H:i' }}</p>
+          <p>Last Updated: {{ post.published_date|date:'M d, Y H:i' }}</p>
         </div>
         {% autoescape off %}
           <p>{{ post.body|truncatewords:50 }}</p>
         {% endautoescape %}
-        <p class="readmore"><a href="{{ post.get_absolute_url }}">Keep reading <i class="fa fa-angle-double-right" style="padding-left: 5px;"></i></a></p>
         <p class="readmore">
-          <b>Categories:</b>
-              <a href="../../">Django,</a>
-              <a href="../../../scrapy/">Scrapy,</a>
-              <a href="../../../technical-blogs/">technical-blogs</a>
+          <a href="{{ post.get_absolute_url }}">Keep reading
+            <i class="fa fa-angle-double-right" style="padding-left: 5px;"></i>
+          </a>
         </p>
       {% endfor %}
     </header>

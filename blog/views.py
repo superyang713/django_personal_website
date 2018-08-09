@@ -1,14 +1,11 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import FormView
-from django.urls import reverse_lazy, reverse
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.utils import timezone
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
-
-from .models import Post
-from .forms import PostNewForm
+from blog.models import Post
+from blog.forms import PostNewForm
 
 
 class PostListView(ListView):
@@ -18,10 +15,11 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.all().order_by('published_date')
+        context['posts'] = Post.objects.all().order_by('created_date')
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class PostDetailView(DetailView):
     model = Post
     slug_url_kwarg = 'slug'
@@ -29,10 +27,11 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['post'] = Post.objects.get(slug=self.kwargs['slug'])
+        context['post'] = get_object_or_404(Post, slug=self.kwargs['slug'])
         return context
 
 
+@login_required
 def post_new(request):
     if request.method != 'POST':
         form = PostNewForm()
@@ -44,4 +43,27 @@ def post_new(request):
             new_post = form.save(commit=False)
             new_post.author = request.user
             new_post.publish()
-            return HttpResponseRedirect(reverse('blog:post_list'))
+            return redirect('blog:post_detail', slug=new_post.slug)
+
+
+@login_required
+def post_edit(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if request.method != 'POST':
+        form = PostNewForm(instance=post)
+        context = {'form': form, 'post': post}
+        return render(request, 'blog/post_edit.html', context)
+    else:
+        form = PostNewForm(instance=post, data=request.POST)
+        if form.is_valid():
+            edit_post = form.save(commit=False)
+            edit_post.author = request.user
+            edit_post.publish()
+            return redirect('blog:post_detail', slug=edit_post.slug)
+
+
+@login_required
+def post_remove(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.delete()
+    return redirect('blog:post_list')
