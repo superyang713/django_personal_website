@@ -47,14 +47,14 @@
             <a class="nav-link">Hello, {{ user.username }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'users:logout' %}">log out</a>
+            <a class="nav-link" href="{% url 'users:logout' %}"><small>log out</small></a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'users:register' %}">register</a>
+            <a class="nav-link" href="{% url 'users:register' %}"><small>register</small></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'users:login' %}">log in</a>
+            <a class="nav-link" href="{% url 'users:login' %}"><small>log in</small></a>
           </li>
           {% endif %}
         </ul>
