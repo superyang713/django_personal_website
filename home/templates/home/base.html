@@ -11,6 +11,7 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}">
   {% bootstrap_css %}
+  {% bootstrap_javascript jquery="slim" %}
   <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
   <link href="{% static 'home/css/custom.css' %}" rel="stylesheet">
   {% block link %} {% endblock %}
@@ -95,7 +96,6 @@
     </div>
   </div>
 
-  {% bootstrap_javascript jquery="slim" %}
 
 </body>
 </html>
