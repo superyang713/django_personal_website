@@ -9,7 +9,7 @@
   <meta name="description" content="Personal Tech Blog">
   <meta name="author" content="Yang Dai">
   <title>{% block title %}{% endblock %}</title>
-  <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}">
+  <link rel="shortcut icon" href="{% static 'home/images/yang_banner.png' %}">
   {% bootstrap_css %}
   {% bootstrap_javascript jquery="slim" %}
   <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
@@ -22,7 +22,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home:index' %}">Yang Dai</a>
+      <a class="navbar-brand" href="{% url 'home:index' %}"><img style="max-height:30px;" src="{% static 'home/images/yang_banner.png'%}"/>Yang Dai</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
