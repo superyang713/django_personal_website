@@ -1,9 +1,9 @@
-{% extends "blog/base.html" %}
-{% load bootstrap3 %}
+{% extends "home/base.html" %}
+{% load bootstrap4 %}
 {% block content %}
 
 <div class="container">
-  <p>Log in to your account</p>
+  <h2 class='text-center'>Log in to your account</h2>
   <form class="form" action="{% url 'users:login' %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form %}

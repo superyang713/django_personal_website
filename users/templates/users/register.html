@@ -1,9 +1,10 @@
-{% extends "blog/base.html" %}
-{% load bootstrap3 %}
+{% extends "home/base.html" %}
+{% load bootstrap4 %}
 {% block content %}
 <body>
 <div class="container">
   <form action="{% url 'users:register' %}" method="post">
+  <h2 class='text-center'>The registration is just for blog comments only.</h2>
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}
