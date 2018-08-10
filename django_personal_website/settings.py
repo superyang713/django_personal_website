@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Thrid party app
     'bootstrap3',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -131,5 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Settings for django-bootstrap3
 BOOTSTRAP3 = {
+    'include_jquery': True,
+}
+BOOTSTRAP4 = {
     'include_jquery': True,
 }
