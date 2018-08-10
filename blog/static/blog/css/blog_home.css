@@ -13,3 +13,9 @@ body {
     padding-top: 56px;
   }
 }
+
+footer .fa {
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+    }

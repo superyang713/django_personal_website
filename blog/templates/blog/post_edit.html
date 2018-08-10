@@ -1,8 +1,8 @@
-{% extends "blog/base.html" %}
-{% load bootstrap3 %}
+{% extends "home/base.html" %}
+{% load bootstrap4 %}
 {% block content %}
 <div class="container">
-  <p>Edit Post:</p>
+  <h3>Edit Post:</h3>
   <form class="form" action="{% url 'blog:post_edit' post.slug %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
