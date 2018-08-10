@@ -2,14 +2,6 @@
 {% block content %}
 {% load static %}
 <body>
-    <br><br>
-    <div class="container" align="center">
-        <a href="{% url 'home:about' %}"><button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-globe"></span> About Me </button></a>
-        <a href="{% url 'lab:pressure_monitor' %}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-glass">lab stuff</span></button></a>
-        <a href="{% url 'blog:post_list' %}"><button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-console"></span> Blog </button></a>
-    </div>
-    <br>
-    <br>
     <div class="container" align="center">
         <img style="max-width:100%;" src="{% static 'home/images/homepage_pic.png' %}">
     </div>

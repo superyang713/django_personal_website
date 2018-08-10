@@ -3,92 +3,99 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>{% block title %}{% endblock %}</title>
-	<link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}">
-    {% bootstrap_css %}
-    <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
-    <link href="{% static 'blog/css/blog_home.css' %}" rel="stylesheet">
-    {% block link %} {% endblock %}
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Personal Tech Blog">
+  <meta name="author" content="Yang Dai">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}">
+  {% bootstrap_css %}
+  <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'home/css/custom.css' %}" rel="stylesheet">
+  {% block link %} {% endblock %}
+</head>
 
-  <body>
+<body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'home:index' %}">Yang Dai</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home:index' %}">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home:about' %}">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'lab:pressure_monitor' %}">Lab</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog:post_list' %}">Blog</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link">Hello, {{ user.username }}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'users:logout' %}">log out</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'users:register' %}">register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'users:login' %}">log in</a>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home:index' %}">Yang Dai</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home:index' %}">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'lab:pressure_monitor' %}">Lab</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:post_list' %}">Blog</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link">Hello, {{ user.username }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:logout' %}">log out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:register' %}">register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:login' %}">log in</a>
+          </li>
+          {% endif %}
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
 {% block content %}
 {% endblock %}
 
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <div class="m-0 text-center text-white">
-              <h4>Contact Me</h3><br>
-              <p>Phone: 617-253-6964</p>
-              <p>Email: daiy@mit.edu</p>
+  <div class="footer">
+    <div class="py-5 bg-dark">
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <div class="m-0 text-center text-white">
+                <h5>Contact Me</h5><br>
+                <p>Phone: 617-253-6964</p>
+                <p>Email: daiy@mit.edu</p>
+              </div>
             </div>
-          </div>
-          <div class="col-sm">
-            <div class="m-0 text-center text-white">
-              <p>Copyright &copy; Yang Dai Website 2018</p>
+            <div class="col-sm">
+              <div class="m-0 text-center text-white">
+                <p>Copyright &copy; Yang Dai Website 2018</p>
+              </div>
             </div>
-          </div>
-          <div class="col-sm">
-            <div class="m-0 text-center text-white">
-              <h3>Connect</h3>
-              <a href="https://www.linkedin.com/in/yangdai713" class="fa fa-linkedin"></a>
-              <a href="https://github.com/superyang713" class="fa fa-github"></a>
-              <a href="{% static 'home/images/wechat.jpg' %}" class="fa fa-wechat"></a>
+            <div class="col-sm">
+              <div class="m-0 text-center text-white">
+                <h5>Connect</h5>
+                <a href="https://www.linkedin.com/in/yangdai713"><i class="fa fa-linkedin"></i></a>
+                <a href="https://github.com/superyang713" class="fa fa-github"></a>
+                <a href="{% static 'home/images/wechat.jpg' %}" class="fa fa-wechat"></a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
-  </body>
+      </footer>
+    </div>
+  </div>
+
+  {% bootstrap_javascript jquery="slim" %}
+
+</body>
 </html>
