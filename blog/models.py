@@ -3,6 +3,14 @@ from django.urls import reverse
 from django.utils import timezone
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, null=True, default='')
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
@@ -10,6 +18,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     slug = models.SlugField(max_length=140, unique=True)
+    tag = models.ManyToManyField(Tag, related_name='posts')
 
     def publish(self):
         self.published_date = timezone.now()

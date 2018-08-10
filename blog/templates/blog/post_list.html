@@ -27,7 +27,7 @@
                 Posted on {{ post.created_date|date:'M d, Y' }}
                 <br>
                 Last Updated on {{ post.published_date|date:'M d, Y' }} by
-                <a href="#">{{ post.author }}</a>
+                <a href="{% url 'home:about' %}">{{ post.author }}</a>
               </small>
             </div>
           </div>
@@ -95,13 +95,10 @@
               </div>
             </div>
           </div>
-
-
         </div>
 
       </div>
       <!-- /.row -->
-
     </div>
     <!-- /.container -->
 {% endblock content %}

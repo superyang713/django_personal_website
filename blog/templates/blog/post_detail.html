@@ -1,22 +1,90 @@
-{% extends "blog/base.html" %}
-{% load bootstrap3 %}
+{% extends "home/base.html" %}
+{% block title %}
+  {{ post.title }}
+{% endblock title %}
+
 {% block content %}
-<main class="content" role="main">
-  <article class="preview">
-    <header>
-      <h1 class="post-title">{{ post.title }}</h1>
-      <div class="post-meta">
-        <p>published: {{ post.created_date|date:'M d, Y H:i' }}</p>
-        <p>Last Updated: {{ post.published_date|date:'M d, Y H:i' }}</p>
+  <div class="container">
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+        <h1 class="mt-4">{{ post.title }}</h1>
+
+        <p class="lead">by <a href="{% url 'home:about' %}">{{ post.author }}</a></p>
+        <hr>
+        <!-- Date/Time -->
+        <p>Posted on {{ post.created_date|date:'M d, Y' }} Last Updated on {{ post.published_date|date:'M d, Y' }}</p>
+        {% if user.is_superuser %}
+          <a href="{% url 'blog:post_edit' post.slug %}"><button type="button" class="btn btn-primary">EDIT</button></a>
+          <a href="{% url 'blog:post_remove' post.slug %}"><button type="button" class="btn btn-danger">DELETE</button></a>
+        {% endif %}
+        <hr>
+
+        <!-- Post Content -->
+        {% autoescape off %}
+          <p>{{ post.body }}</p>
+        {% endautoescape %}
+        <hr>
+
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+          <!-- Search Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Search</h5>
+            <div class="card-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">Go!</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="#">Web Design</a>
+                    </li>
+                    <li>
+                      <a href="#">HTML</a>
+                    </li>
+                    <li>
+                      <a href="#">Freebies</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="#">JavaScript</a>
+                    </li>
+                    <li>
+                      <a href="#">CSS</a>
+                    </li>
+                    <li>
+                      <a href="#">Tutorials</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {% if user.is_superuser %}
-        <a class="btn btn-default" href="{% url 'blog:post_edit' post.slug %}">{% bootstrap_icon 'edit' %}</a>
-        <a class="btn btn-default" href="{% url 'blog:post_remove' post.slug %}">{% bootstrap_icon 'remove' %}</a>
-      {% endif %}
-      {% autoescape off %}
-        <p>{{ post.body }}</p>
-      {% endautoescape %}
-    </header>
-  </article>
-</main>
-{% endblock %}
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+
+{% endblock content %}
