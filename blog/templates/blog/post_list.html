@@ -13,6 +13,9 @@
         <h1 class="my-4">Yang's Blog
           <small>Awesome Stuff I have come across</small>
         </h1>
+        {% if user.is_superuser %}
+          <a href="{% url 'blog:post_new' %}"><button type="button" class="btn btn-primary">New Post</button></a>
+        {% endif %}
 
         <!-- Blog Post -->
         {% for post in posts %}
