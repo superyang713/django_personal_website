@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 from blog.models import Post
-from blog.forms import PostNewForm
+from blog.forms import PostNewForm, CommentForm
 
 
 class PostListView(ListView):
@@ -65,3 +65,18 @@ def post_remove(request, slug):
     post = get_object_or_404(Post, slug=slug)
     post.delete()
     return redirect('blog:post_list')
+
+
+def add_comment(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if request.method != 'POST':
+        form = CommentForm()
+        context = {'form': form}
+        return render(request, 'blog/add_comment.html', context)
+    else:
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('blog:post_detail', slug=post.slug)

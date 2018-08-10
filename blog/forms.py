@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.text import slugify
 
-from blog.models import Post
+from blog.models import Post, Comment
 
 
 class PostNewForm(forms.ModelForm):
@@ -16,3 +16,9 @@ class PostNewForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('author', 'text')

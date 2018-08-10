@@ -4,7 +4,7 @@
 
 <div class="container">
   <h2 class='text-center'>Log in to your account</h2>
-  <form class="form" action="{% url 'users:login' %}" method="post">
+  <form class="form" action="{% url 'users:login' %}" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}

@@ -1,0 +1,12 @@
+{% extends "home/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+  <form class="form" action="{% url 'blog:add_comment' post.slug %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button name="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+    <input type="hidden" name="next" value="{% url 'blog:post_detail' post.slug %}"/>
+  </form>
+{% endblock content %}

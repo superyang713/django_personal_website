@@ -1,4 +1,5 @@
 {% extends "home/base.html" %}
+{% load bootstrap4 %}
 {% block title %}
   {{ post.title }}
 {% endblock title %}
@@ -83,6 +84,22 @@
         </div>
       </div>
       <!-- /.row -->
+
+<a class="btn btn-default" href="{% url 'blog:add_comment' slug=post.slug %}">Add Comment</a>
+
+      <!-- Single Comment -->
+        <div class="media mb-4">
+          <div class="media-body">
+          {% for comment in post.comments.all  %}
+            <strong class="mt-0">{{ comment.author }}</strong>
+            <small>Posted on {{ comment.created_date|date:'M d, Y' }}</small>
+            {{ comment.text|linebreaks }}
+          {% empty %}
+              <p>No comments here yet...</p>
+          {% endfor %}
+          </div>
+        </div>
+
     </div>
     <!-- /.container -->
 
