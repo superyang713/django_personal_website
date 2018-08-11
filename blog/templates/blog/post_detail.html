@@ -1,107 +1,41 @@
-{% extends "home/base.html" %}
+{% extends "blog/base.html" %}
 {% load bootstrap4 %}
 {% block title %}
   {{ post.title }}
 {% endblock title %}
 
 {% block content %}
-  <div class="container">
-    <div class="row">
-
-      <!-- Post Content Column -->
-      <div class="col-lg-8">
-        <h1 class="mt-4">{{ post.title }}</h1>
-
-        <p class="lead">by <a href="{% url 'home:about' %}">{{ post.author }}</a></p>
-        <hr>
-        <!-- Date/Time -->
-        <p>Posted on {{ post.created_date|date:'M d, Y' }} Last Updated on {{ post.published_date|date:'M d, Y' }}</p>
-        {% if user.is_superuser %}
-          <a href="{% url 'blog:post_edit' post.slug %}"><button type="button" class="btn btn-primary">EDIT</button></a>
-          <a href="{% url 'blog:post_remove' post.slug %}"><button type="button" class="btn btn-danger">DELETE</button></a>
-        {% endif %}
-        <hr>
-
-        <!-- Post Content -->
-        {% autoescape off %}
-          <p>{{ post.body }}</p>
-        {% endautoescape %}
-        <hr>
-
-
-        </div>
-
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-          <!-- Search Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Search</h5>
-            <div class="card-body">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Categories Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Categories</h5>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Web Design</a>
-                    </li>
-                    <li>
-                      <a href="#">HTML</a>
-                    </li>
-                    <li>
-                      <a href="#">Freebies</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">JavaScript</a>
-                    </li>
-                    <li>
-                      <a href="#">CSS</a>
-                    </li>
-                    <li>
-                      <a href="#">Tutorials</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /.row -->
-
-<a class="btn btn-default" href="{% url 'blog:add_comment' slug=post.slug %}">Add Comment</a>
-
-      <!-- Single Comment -->
-        <div class="media mb-4">
-          <div class="media-body">
-          {% for comment in post.comments.all  %}
-            <strong class="mt-0">{{ comment.author }}</strong>
-            <small>Posted on {{ comment.created_date|date:'M d, Y' }}</small>
-            {{ comment.text|linebreaks }}
-          {% empty %}
-              <p>No comments here yet...</p>
-          {% endfor %}
-          </div>
-        </div>
-
-    </div>
-    <!-- /.container -->
-
-
+<div class="col-lg-8">
+  <h1 class="mt-4">{{ post.title }}</h1>
+  <p class="lead">by <a href="{% url 'home:about' %}">{{ post.author }}</a></p>
+  <hr>
+  <p>Posted on {{ post.created_date|date:'M d, Y' }} Last Updated on {{ post.published_date|date:'M d, Y' }}</p>
+  {% if user.is_superuser %}
+    <a href="{% url 'blog:post_edit' post.slug %}"><button type="button" class="btn btn-primary">EDIT</button></a>
+    <a href="{% url 'blog:post_remove' post.slug %}"><button type="button" class="btn btn-danger">DELETE</button></a>
+  {% endif %}
+  <hr>
+  {% autoescape off %}
+    <p>{{ post.body }}</p>
+  {% endautoescape %}
+  <hr>
+</div>
 {% endblock content %}
+
+{% block comment %}
+    <a href="{% url 'blog:add_comment' post.slug %}">
+      <button type="submit" class="btn btn-primary">Post comment</button>
+    </a>
+    <hr>
+    <div class="media mb-4">
+      <div class="media-body">
+      {% for comment in post.comments.all  %}
+        <strong class="mt-0">{{ comment.author }}</strong>
+        <small>Posted on {{ comment.created_date|date:'M d, Y' }}</small>
+        {{ comment.text|linebreaks }}
+      {% empty %}
+          <p>No comments here yet...</p>
+      {% endfor %}
+      </div>
+    </div>
+{% endblock comment %}

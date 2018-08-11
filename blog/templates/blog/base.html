@@ -1,0 +1,142 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Personal Tech Blog">
+  <meta name="author" content="Yang Dai">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="shortcut icon" href="{% static 'home/images/yang_banner.png' %}">
+  {% bootstrap_css %}
+  {% bootstrap_javascript jquery="slim" %}
+  <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'home/css/custom.css' %}" rel="stylesheet">
+  {% block link %} {% endblock %}
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home:index' %}"><img style="max-height:30px;" src="{% static 'home/images/yang_banner.png'%}"/>Yang Dai</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home:index' %}">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'lab:pressure_monitor' %}">Lab</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:post_list' %}">Blog</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link">Hello, {{ user.username }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:logout' %}"><small>log out</small></a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:register' %}"><small>register</small></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:login' %}"><small>log in</small></a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="row">
+    {% block content %}
+    {% endblock content %}
+      <!-- Sidebar Widgets Column Start-->
+      <div class="col-md-4">
+
+        <!-- Sidebar Widgets Search-->
+        <div class="card my-4">
+          <h5 class="card-header">Search</h5>
+          <div class="card-body">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <ul class="list-unstyled mb-0">
+            {% for tag in tags %}
+              <li>
+                <a href="{% url 'blog:tag_search_result' pk=tag.id %}">{{tag.name }}</a>
+              </li>
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+      <!-- Sidebar Widgets Column End-->
+      </div>
+    </div>
+
+    {% block comment %}
+    {% endblock comment %}
+
+  </div>
+
+  <div class="footer">
+    <div class="py-5 bg-dark">
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <div class="m-0 text-center text-white">
+                <h5>Contact Me</h5><br>
+                <p>Phone: 617-253-6964</p>
+                <p>Email: daiy@mit.edu</p>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="m-0 text-center text-white">
+                <p>Copyright &copy; Yang Dai Website 2018</p>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="m-0 text-center text-white">
+                <h5>Connect</h5>
+                <a href="https://www.linkedin.com/in/yangdai713"><i class="fa fa-linkedin"></i></a>
+                <a href="https://github.com/superyang713" class="fa fa-github"></a>
+                <a href="{% static 'home/images/wechat.jpg' %}" class="fa fa-wechat"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+
+</body>
+</html>

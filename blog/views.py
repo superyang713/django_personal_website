@@ -3,7 +3,7 @@ from django.views.generic.detail import DetailView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
-from blog.models import Post
+from blog.models import Post, Tag
 from blog.forms import PostNewForm, CommentForm
 
 
@@ -15,6 +15,7 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.all().order_by('created_date')
+        context['tags'] = Tag.objects.all()
         return context
 
 
@@ -26,6 +27,7 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post'] = get_object_or_404(Post, slug=self.kwargs['slug'])
+        context['tags'] = Tag.objects.all()
         return context
 
 
@@ -71,7 +73,7 @@ def add_comment(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.method != 'POST':
         form = CommentForm()
-        context = {'form': form}
+        context = {'form': form, 'post': post}
         return render(request, 'blog/add_comment.html', context)
     else:
         form = CommentForm(data=request.POST)
@@ -80,3 +82,9 @@ def add_comment(request, slug):
             comment.post = post
             comment.save()
             return redirect('blog:post_detail', slug=post.slug)
+
+def tag_search_result(request, pk):
+    tag = Tag.objects.get(id=pk)
+    posts = tag.post_set.all()
+    context = {'posts': posts, 'tags': Tag.objects.all()}
+    return render(request, 'blog/tag_search_result.html', context)

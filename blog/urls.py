@@ -13,4 +13,5 @@ urlpatterns = [
     path('edit/<slug:slug>', views.post_edit, name='post_edit'),
     path('remove/<slug:slug>', views.post_remove, name='post_remove'),
     path('comment/<slug:slug>', views.add_comment, name='add_comment'),
+    path('tag/<int:pk>', views.tag_search_result, name='tag_search_result'),
 ]

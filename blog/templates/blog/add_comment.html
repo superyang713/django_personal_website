@@ -1,12 +1,18 @@
 {% extends "home/base.html" %}
 {% load bootstrap4 %}
 {% block content %}
-  <form class="form" action="{% url 'blog:add_comment' post.slug %}" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-      <button name="submit" class="btn btn-primary">Submit</button>
-    {% endbuttons %}
+
+<div class="card my-4">
+  <h5 class="card-header">Leave a Comment:</h5>
+  <div class="card-body">
+    <form class="form" action="{% url 'blog:add_comment' post.slug %}" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      {% endbuttons %}
     <input type="hidden" name="next" value="{% url 'blog:post_detail' post.slug %}"/>
-  </form>
+    </form>
+  </div>
+</div>
 {% endblock content %}

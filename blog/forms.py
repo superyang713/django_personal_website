@@ -7,7 +7,7 @@ from blog.models import Post, Comment
 class PostNewForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'body')
+        fields = ('title', 'body', 'tag')
 
     # Override save method to implement auto-prepopulate slugfield.
     def save(self, commit=True):
