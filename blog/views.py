@@ -43,6 +43,7 @@ def post_new(request):
             new_post = form.save(commit=False)
             new_post.author = request.user
             new_post.publish()
+            form.save_m2m()
             return redirect('blog:post_detail', slug=new_post.slug)
 
 
@@ -59,6 +60,7 @@ def post_edit(request, slug):
             edit_post = form.save(commit=False)
             edit_post.author = request.user
             edit_post.publish()
+            form.save_m2m()
             return redirect('blog:post_detail', slug=edit_post.slug)
 
 
@@ -83,8 +85,8 @@ def add_comment(request, slug):
             comment.save()
             return redirect('blog:post_detail', slug=post.slug)
 
+
 def tag_search_result(request, pk):
-    tag = Tag.objects.get(id=pk)
-    posts = tag.post_set.all()
+    posts = Post.objects.filter(tag__pk=pk)
     context = {'posts': posts, 'tags': Tag.objects.all()}
     return render(request, 'blog/tag_search_result.html', context)
