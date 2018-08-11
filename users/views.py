@@ -1,13 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.shortcuts import redirect
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('blog:post_list'))
+    return redirect('blog:post_list')
 
 
 def register(request):
@@ -24,4 +23,4 @@ def register(request):
                 password=request.POST['password1']
             )
             login(request, authenticated_user)
-            return HttpResponseRedirect(reverse('blog:post_list'))
+            return redirect('blog:post_list')

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound
 
 from blog.models import Post, Tag
-from blog.forms import PostNewForm, CommentForm
+from blog.forms import PostForm, CommentForm
 
 
 class PostListView(ListView):
@@ -36,11 +36,11 @@ class PostDetailView(DetailView):
 def post_new(request):
     if request.user.is_superuser:
         if request.method != 'POST':
-            form = PostNewForm()
+            form = PostForm()
             context = {'form': form}
             return render(request, 'blog/post_new.html', context)
         else:
-            form = PostNewForm(data=request.POST)
+            form = PostForm(data=request.POST)
             if form.is_valid():
                 new_post = form.save(commit=False)
                 new_post.author = request.user
@@ -57,11 +57,11 @@ def post_edit(request, slug):
     if request.user.is_superuser:
         post = get_object_or_404(Post, slug=slug)
         if request.method != 'POST':
-            form = PostNewForm(instance=post)
+            form = PostForm(instance=post)
             context = {'form': form, 'post': post}
             return render(request, 'blog/post_edit.html', context)
         else:
-            form = PostNewForm(instance=post, data=request.POST)
+            form = PostForm(instance=post, data=request.POST)
             if form.is_valid():
                 edit_post = form.save(commit=False)
                 edit_post.author = request.user
@@ -82,12 +82,12 @@ def post_remove(request, slug):
         return HttpResponseNotFound('<h1>Superuser Permission Required!</h1>')
 
 
-def add_comment(request, slug):
+def post_comment(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if request.method != 'POST':
         form = CommentForm()
         context = {'form': form, 'post': post}
-        return render(request, 'blog/add_comment.html', context)
+        return render(request, 'blog/post_comment.html', context)
     else:
         form = CommentForm(data=request.POST)
         if form.is_valid():

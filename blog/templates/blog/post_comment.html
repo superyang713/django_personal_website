@@ -5,7 +5,7 @@
 <div class="card my-4">
   <h5 class="card-header">Leave a Comment:</h5>
   <div class="card-body">
-    <form class="form" action="{% url 'blog:add_comment' post.slug %}" method="POST">
+    <form class="form" action="{% url 'blog:post_comment' post.slug %}" method="POST">
       {% csrf_token %}
       {% bootstrap_form form %}
       {{ form.media }}
