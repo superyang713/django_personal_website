@@ -65,8 +65,8 @@
   <div class="container">
 
     <div class="row">
-    {% block content %}
-    {% endblock content %}
+      {% block content %}
+      {% endblock content %}
       <!-- Sidebar Widgets Column Start-->
       <div class="col-md-4">
 
@@ -75,10 +75,12 @@
           <h5 class="card-header">Search</h5>
           <div class="card-body">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
+              <form class="form-inline" action="{% url 'blog:search' %}" method="get">
+                <input type="text" name="q" class="form-control" placeholder="Search for...">
+                {% buttons %}
+                  <button class="btn btn-secondary">Go!</button>
+                {% endbuttons %}
+              </form>
             </div>
           </div>
         </div>

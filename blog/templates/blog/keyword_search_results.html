@@ -11,9 +11,6 @@
         <h1 class="my-4">Yang's Blog
           <small>Awesome Stuff I have come across</small>
         </h1>
-        {% if user.is_superuser %}
-          <a href="{% url 'blog:post_new' %}"><button type="button" class="btn btn-primary">New Post</button></a>
-        {% endif %}
 
         <!-- Blog Post -->
         {% for post in posts %}
@@ -35,16 +32,6 @@
         {% empty %}
           <p>No search result was found...</p>
         {% endfor %}
-
-        <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
-          <li class="page-item">
-            <a class="page-link" href="#">&larr; Older</a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">Newer &rarr;</a>
-          </li>
-        </ul>
 
       </div>
 
