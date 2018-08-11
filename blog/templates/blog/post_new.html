@@ -6,6 +6,7 @@
   <form class="form" action="{% url 'blog:post_new' %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
+    {{ form.media }}
 
     {% buttons %}
       <button name="submit" class="btn btn-primary">Publish</button>

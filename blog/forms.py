@@ -1,10 +1,13 @@
 from django import forms
 from django.utils.text import slugify
 
+from markdownx.fields import MarkdownxFormField
+
 from blog.models import Post, Comment
 
 
 class PostNewForm(forms.ModelForm):
+    Post.body = MarkdownxFormField()
     class Meta:
         model = Post
         fields = ('title', 'body', 'tag')
@@ -19,6 +22,8 @@ class PostNewForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    Comment.text = MarkdownxFormField()
+
     class Meta:
         model = Comment
         fields = ('author', 'text')

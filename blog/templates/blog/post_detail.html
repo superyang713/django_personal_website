@@ -16,7 +16,7 @@
   {% endif %}
   <hr>
   {% autoescape off %}
-    <p>{{ post.body }}</p>
+    {{ post.formatted_markdown }}
   {% endautoescape %}
   <hr>
 </div>
@@ -32,7 +32,9 @@
       {% for comment in post.comments.all  %}
         <strong class="mt-0">{{ comment.author }}</strong>
         <small>Posted on {{ comment.created_date|date:'M d, Y' }}</small>
-        {{ comment.text|linebreaks }}
+        {% autoescape off %}
+          {{ comment.formatted_markdown }}
+        {% endautoescape %}
       {% empty %}
           <p>No comments here yet...</p>
       {% endfor %}

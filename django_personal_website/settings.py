@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.forms',
 
     # My apps
     'home',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 
     # Thrid party app
     'bootstrap4',
+    'markdownx',
 ]
 
 MIDDLEWARE = [

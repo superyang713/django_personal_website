@@ -7,4 +7,5 @@ urlpatterns = [
     path('lab/', include('lab.urls', namespace='lab')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('users/', include('users.urls', namespace='users')),
+    path('markdownx/', include('markdownx.urls')),
 ]
