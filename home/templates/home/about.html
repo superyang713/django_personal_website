@@ -1,4 +1,56 @@
 {% extends "home/base.html" %}
+{% block title %}About Me {% endblock %}
+{% block link %}
+<style type="text/css">
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<p>hello world</p>
+{% load static %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <img src="https://www.dropbox.com/s/ai9wlccf755rr13/rsz_1img_0117.jpg?raw=1" alt="Yang" style="width:100%">
+        <h1>Yang Dai</h1>
+        <p style="color: grey; font-size: 18px;" class="title">Postdoctoral Researcher</p>
+        <p>Massachusetts Institute of Technology</p>
+        <div class="container">
+        <a style="text-decoration: none; font-size: 22px; color: black;" href="https://www.linkedin.com/in/yangdai713"><i class="fa fa-linkedin"></i></a>
+        <a style="text-decoration: none; font-size: 22px; color: black;" href="https://github.com/superyang713"><i class="fa fa-github"></i></a>
+        <a style="text-decoration: none; font-size: 22px; color: black;" href="{% static 'home/images/wechat.jpg' %}"><i class="fa fa-wechat"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <p>The picture in the homepage is the surface science instrument I
+      have designed and built during my Ph.D study in chemistry. It is
+      capable of atomic layer deposition, in situ analysis of as-deposited
+      samples via XPS and TPD, as well as deposition of size-selected metal
+      clusters on substrates in ultra-high vacuum.
+
+      <p>I have done plenty of data analysis at my work using different
+      programming tools, however, ever since I laid my hands on Python, I
+      just couldn't let it go. It made me fall in love with programming. It
+      is so powerful and I even built my entire site with python django as
+      my backend.</p>
+
+      <p>I will randomly post some stuff that I have learned about
+      programming in my blog, mainly as a learning journal for myself and a
+      way to motivate me to get better. My current focus, apart from
+      chemistry of course, is machine learning and deep learning, as I can
+      easily transfer my data analysis skill sets into these areas.</p>
+
+      <p>I am also a fan of homebrew, not a brewmaster though, but good
+      enough to keep myself entertained.</p>
+    </div>
+  </div>
+</div>
 {% endblock %}

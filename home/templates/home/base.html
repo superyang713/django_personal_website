@@ -11,10 +11,17 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="shortcut icon" href="{% static 'home/images/yang_banner.png' %}">
   {% bootstrap_css %}
-  {% bootstrap_javascript jquery="slim" %}
   <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
   <link href="{% static 'home/css/custom.css' %}" rel="stylesheet">
+  {% bootstrap_javascript %}
+  <script language="javascript" type="text/javascript" src="{% static 'lab/pressure_monitor/js/jquery.js' %}"></script>
   {% block link %} {% endblock %}
+  <script charset="utf-8">
+    $(document).ready(function() {
+    $('li.active').removeClass('active');
+    $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+    });
+  </script>
 </head>
 
 <body>

@@ -3,7 +3,7 @@
 {% load static %}
 <body>
     <div class="container" align="center">
-        <img style="max-width:100%;" src="{% static 'home/images/homepage_pic.png' %}">
+        <a href="{% url 'home:about' %}"><img style="max-width:100%;" src="{% static 'home/images/homepage_pic.png' %}"></a>
     </div>
 </body>
 {% endblock %}
