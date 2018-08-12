@@ -20,12 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1eaij9w4)@5_$4-7r%qhb22qf25xph^bz7umub-i5(bd9#@e00'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # put web server name here, same as nginx config
+]
 
 
 # Application definition
@@ -37,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.forms',
 
     # My apps
     'home',
@@ -86,8 +87,12 @@ WSGI_APPLICATION = 'django_personal_website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'database1',
+        'USER': '',  # <-----------put user name here.
+        'PASSWORD': '',  # <-----------put password here.
+        'HOST': 'database1',
+        'PORT': '5432',
     }
 }
 
@@ -130,6 +135,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+# My settings
+LOGIN_URL = '/users/login/'
 
 BOOTSTRAP4 = {
     'include_jquery': True,
