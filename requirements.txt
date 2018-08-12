@@ -1,3 +1,8 @@
 Django==2.1
-django-bootstrap3==10.0.1
+django-bootstrap4==0.0.6
+django-markdownx==2.0.23
+gunicorn==19.9.0
+Markdown==2.6.11
+Pillow==5.2.0
+psycopg2==2.7.5
 pytz==2018.5
