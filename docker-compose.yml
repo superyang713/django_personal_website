@@ -22,7 +22,7 @@ services:
             - 80:80
         volumes:
             - ./config/nginx/conf.d:/etc/nginx/conf.d
-            - static_volume:/opt/services/django_app/src/app/static
+            - static_volume:/opt/services/personal_website/src/app/static
         depends_on:
             - django
         networks:
