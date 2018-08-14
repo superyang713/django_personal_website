@@ -1,0 +1,50 @@
+<head>
+  <!-- Plotly.js -->
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+   <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div id="myDiv1"></div>
+            </div>
+            <div class="col-lg-6">
+                <div id="myDiv2"></div>
+            </div>
+        </div>
+    </div>
+  <script>
+    function makeplot() {
+        Plotly.d3.tsv("https://dl.dropbox.com/s/xd211d2jqm23txj/bakeout_info", function(data){ processData(data) } );
+
+    };
+
+    function processData(allRows) {
+
+        var x = [], y = [], z=[];
+
+        for (var i=0; i<allRows.length; i++) {
+            row = allRows[i];
+            x.push( row['3614953811.134'] );
+            y.push( row['5.717'] );
+            z.push( row['289.152'] );
+        }
+        makePlotly( x, y, 'Main Chamber Pressure', 'myDiv1' );
+        makePlotly( x, z, 'Sample Tempreture', 'myDiv2' );
+    }
+
+    function makePlotly( x, y, title, tag ){
+        var plotDiv = document.getElementById("plot");
+        var traces = [{
+            x: x,
+            y: y,
+        }];
+
+        Plotly.newPlot(tag, traces,
+            {title: title});
+    };
+    makeplot();
+  </script>
+</body>
