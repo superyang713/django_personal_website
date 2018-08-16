@@ -21,6 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'changethesecretkeyhere'
+DISQUS_API_KEY = 'DqTzD3ES6XBdLbS9VRghVK06IolVLCR2B6fKXn8ljil0musd16HVQJ886nE43LjM'
+DISQUS_WEBSITE_SHORTNAME = 'yangdai713'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # My apps
     'home',
@@ -49,7 +52,10 @@ INSTALLED_APPS = [
     # Thrid party app
     'bootstrap4',
     'markdownx',
+    'disqus',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

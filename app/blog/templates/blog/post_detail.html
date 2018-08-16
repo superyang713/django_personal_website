@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% load bootstrap4 %}
+{% load disqus_tags %}
 {% block title %}
   {{ post.title }}
 {% endblock title %}
@@ -23,21 +24,5 @@
 {% endblock content %}
 
 {% block comment %}
-  <a href="{% url 'blog:post_comment' post.slug %}">
-    <button type="submit" class="btn btn-primary">Post comment</button>
-  </a>
-  <hr>
-  <div class="media mb-4">
-    <div class="media-body">
-    {% for comment in post.comments.all  %}
-      <strong class="mt-0">{{ comment.author }}</strong>
-      <small>Posted on {{ comment.created_date|date:'M d, Y' }}</small>
-      {% autoescape off %}
-        {{ comment.formatted_markdown }}
-      {% endautoescape %}
-    {% empty %}
-        <p>No comments here yet...</p>
-    {% endfor %}
-    </div>
-  </div>
+    {% disqus_show_comments %}
 {% endblock comment %}

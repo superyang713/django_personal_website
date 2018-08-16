@@ -16,6 +16,12 @@
   <script language="javascript" type="text/javascript" src="{% static 'home/js/jquery.js' %}"></script>
   {% bootstrap_javascript %}
   {% block link %} {% endblock %}
+  <script charset="utf-8">
+    $(document).ready(function() {
+    $('li.active').removeClass('active');
+    $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+    });
+  </script>
 </head>
 <body>
 
@@ -103,8 +109,10 @@
       </div>
     </div>
 
+    <div class="col-md-8">
     {% block comment %}
     {% endblock comment %}
+    </div>
 
   </div>
 
