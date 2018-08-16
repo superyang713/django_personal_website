@@ -1,137 +1,110 @@
-var dmcp = [];
-var dmct = [];
-// Functions and Main
-$(function() {
-    // Load data
-    function LoadData(allText) {
-        var allTextLines = allText.split(/\r\n|\n/);
-        var data = [];
-        for (var i=0; i<allTextLines.length-1; i++) {
-            data[i] = allTextLines[i].split("\t");
-            data[i][0] = data[i][0]*1000-2082844729000;
-            data[i][1] -= 12;
-            dmct.push([data[i][0],data[i][2]-273.15]);
-        }
-        dmcp = data;
-        return data;
-    }
+var title_temperature_plot = "Sample Temperature (C)";
+var title_pressure_plot = "Main Chamber Pressure (Torr)";
 
-    // Get data for zoomed plots
-    function getData(x1, x2, data) {
-        maxl = dmcp.length-1; // maxlength
-        for (var i = 0; i < maxl; i++) {
-            if(data[i][0] > x1) break;
-        }
-        i--;
-        for (var j = i; j < maxl; j++) {
-            if(data[j][0] > x2) break;
-        }
-        return data.slice(i,j+1);
-    }
+var tag_pressure_little = "plot1"
+var tag_temp_little = "plot2"
+var tag_pressure_big = "plot3"
+var tag_temp_big = "plot4"
 
-    //<=======MAIN=======>
-    // Plot options
-    var options = {
-        legend: {
-            show: false
-        },
-        series: {
-            lines: {
-                show: true
-            },
-            points: {
-                show: false
-            }
-        },
-        xaxis: {
-            mode: "time",
-            timezone: "browser"
-        },
+var filepath_little = "https://dl.dropbox.com/s/xd211d2jqm23txj/bakeout_info"
+var filepath_big = "https://dl.dropbox.com/s/e9x575b7k4hn6hs/bakeout"
+
+function makeplot_little() {
+    Plotly.d3.tsv(filepath_little, function(data) { processData_little(data) });
+};
+
+function makeplot_big() {
+    Plotly.d3.tsv(filepath_big, function(data) { processData_big(data) });
+};
+
+function processData_little(allRows) {
+
+    var x = [], y = [], z=[];
+
+    for (var i=0; i<allRows.length; i++) {
+        row = allRows[i];
+        var unixTimestamp = row['time'];
+        var datetime = new Date(unixTimestamp * 1000 - 2082844729000);
+        var formattedTime = new Date(datetime.toString());
+
+        var temp_k = row['temperature'];
+        var temp_c = temp_k - 273.15;
+
+        var pressure_raw = row['pressure'];
+        var pressure_log = Math.pow(10, pressure_raw - 12);
+
+        x.push( formattedTime );
+        y.push( pressure_log );
+        z.push( temp_c );
+    }
+    makePlotly_pressure( x, y, title_pressure_plot, tag_pressure_little);
+    makePlotly_temperature( x, z, title_temperature_plot, tag_temp_little);
+};
+
+function processData_big(allRows) {
+
+    var x = [], y = [], z=[];
+
+    for (var i=0; i<allRows.length; i++) {
+        row = allRows[i];
+        var unixTimestamp = row['time'];
+        var datetime = new Date(unixTimestamp * 1000 - 2082844729000);
+        var formattedTime = new Date(datetime.toString());
+
+        var temp_k = row['temperature'];
+        var temp_c = temp_k - 273.15;
+
+        var pressure_raw = row['pressure'];
+        var pressure_log = Math.pow(10, pressure_raw - 12);
+
+        x.push( formattedTime );
+        y.push( pressure_log );
+        z.push( temp_c );
+    }
+    makePlotly_pressure( x, y, title_pressure_plot, tag_pressure_big);
+    makePlotly_temperature( x, z, title_temperature_plot, tag_temp_big);
+};
+
+function makePlotly_pressure( x, y, title, tag ){
+    var plotDiv = document.getElementById("plot");
+    var traces = [{
+        x: x,
+        y: y,
+    }];
+
+    var layout = {
+        title: title,
+        paper_bgcolor: '#BDBDBD',
+        plot_bgcolor: '#BDBDBD',
         yaxis: {
-            tickFormatter: function(val) {return Math.pow(10,val).toExponential(3)},
-        },
-        selection: {
-            mode: "xy"
+            exponentformat: 'e',
+            type: 'log',
+            autorange: true,
         }
     };
 
-    var options2 = {
-        legend: {
-            show: false
-        },
-        series: {
-            lines: {
-                show: true
-            },
-            points: {
-                show: false
-            }
-        },
-        xaxis: {
-            mode: "time",
-            timezone: "browser"
-        },
-        colors: ["#FF7070"],
-        selection: {
-            mode: "xy"
+    Plotly.newPlot(tag, traces, layout);
+};
+
+function makePlotly_temperature( x, y, title, tag ){
+    var plotDiv = document.getElementById("plot");
+    var traces = [{
+        x: x,
+        y: y,
+        line: {
+            color: 'rgb(128,0,128)',
+            width: 3,
+
         }
+    }];
+
+    var layout = {
+        title: title,
+        paper_bgcolor: '#BDBDBD',
+        plot_bgcolor: '#BDBDBD',
     };
 
-    // Load files and initial plots
-    $.ajax({
-        type: "GET",
-        url: "https://dl.dropbox.com/s/xd211d2jqm23txj/bakeout_info",
-        dataType: "text",
-        success: function(data) {
-            $.plot("#dmcp", [LoadData(data)], options);$.plot("#dmct", [dmct], options2);
-        }
-    });
-
-    // Zoom for plot1
-    $("#dmcp").bind("plotselected", function (event, ranges) {
-
-    // clamp the zooming to prevent eternal zoom
-        if (ranges.xaxis.to - ranges.xaxis.from < 0.00001) {
-            ranges.xaxis.to = ranges.xaxis.from + 0.00001;
-        }
-
-        if (ranges.yaxis.to - ranges.yaxis.from < 0.00001) {
-            ranges.yaxis.to = ranges.yaxis.from + 0.00001;
-        }
-
-    // do the zooming
-    $.plot("#dmcp", [getData(ranges.xaxis.from, ranges.xaxis.to,dmcp)],
-        $.extend(true, {}, options, {
-            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
-            yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
-        }));
-    });
-
-    //	Zoom out
-    $("#dmcp").dblclick(function () {
-        $.plot("#dmcp", [dmcp], options);
-    });
-
-    // Zoom for plot2
-    $("#dmct").bind("plotselected", function (event, ranges) {
-        if (ranges.xaxis.to - ranges.xaxis.from < 0.00001) {
-            ranges.xaxis.to = ranges.xaxis.from + 0.00001;
-        }
-
-        if (ranges.yaxis.to - ranges.yaxis.from < 0.00001) {
-            ranges.yaxis.to = ranges.yaxis.from + 0.00001;
-        }
-
-    // do the zooming
-    $.plot("#dmct", [getData(ranges.xaxis.from, ranges.xaxis.to,dmct)],
-        $.extend(true, {}, options2, {
-            xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
-            yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
-        }));
-    });
-
-    //	Zoom out
-    $("#dmct").dblclick(function () {
-        $.plot("#dmct", [dmct], options2);
-    });
-});
+    Plotly.newPlot(tag, traces, layout);
+};
+makeplot_little();
+makeplot_big();

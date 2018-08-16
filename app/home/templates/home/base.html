@@ -13,15 +13,10 @@
   {% bootstrap_css %}
   <link href="{% static 'home/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
   <link href="{% static 'home/css/custom.css' %}" rel="stylesheet">
-  <script language="javascript" type="text/javascript" src="{% static 'lab/pressure_monitor/js/jquery.js' %}"></script>
+
+  <script language="javascript" type="text/javascript" src="{% static 'home/js/jquery.js' %}"></script>
   {% bootstrap_javascript %}
   {% block link %} {% endblock %}
-  <script charset="utf-8">
-    $(document).ready(function() {
-    $('li.active').removeClass('active');
-    $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
-    });
-  </script>
 </head>
 
 <body>

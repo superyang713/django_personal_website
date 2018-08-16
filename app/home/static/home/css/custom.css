@@ -3,7 +3,7 @@ html {
   min-height: 85%;
 }
 
-body {
+bod {
   margin-bottom: 60px;
 }
 
@@ -37,4 +37,26 @@ body > .container {
 
 code {
   font-size: 80%;
+}
+
+.profile .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.profile img {
+    width: 100%;
+}
+
+.profile .title {
+    color: grey;
+    font-size: 18px;
+}
+
+.profile a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
 }

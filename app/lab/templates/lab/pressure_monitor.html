@@ -3,30 +3,36 @@
 
 {% block link %}
   {% load static %}
-  <link href="{% static 'lab/pressure_monitor/css/custom.css' %}" rel="stylesheet" type="text/css">
-  <script language="javascript" type="text/javascript" src="{% static 'lab/pressure_monitor/js/jquery.flot.js' %}"></script>
-  <script language="javascript" type="text/javascript" src="{% static 'lab/pressure_monitor/js/jquery.flot.selection.js' %}"></script>
-  <script language="javascript" type="text/javascript" src="{% static 'lab/pressure_monitor/js/jquery.flot.time.js' %}"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script language="javascript" type="text/javascript" src="{% static 'lab/pressure_monitor/js/custom.js' %}"></script>
 {% endblock %}
 
 {% block content %}
   <div class="container">
+
     <h1 class="text-center">Little Machine Pressure Monitor</h2>
-    <br>
     <div class="row">
-      <div class="col-sm-6">
-        <h3 class="text-center">Pressure (Torr)</h3>
-        <div class="demo-container">
-          <div id="dmcp" class="demo-placeholder"></div>
-        </div>
+      <div class="col-md-6">
+        <div id="plot1"></div>
       </div>
-      <div class="col-sm-6">
-        <h3 class="text-center">Temperature (C)</h3>
-        <div class="demo-container">
-          <div id="dmct" class="demo-placeholder"></div>
-        </div>
+      <div class="col-md-6">
+        <div id="plot2"></div>
       </div>
     </div>
+
+    <br />
+    <hr />
+    <br />
+
+    <h1 class="text-center">Big Machine Pressure Monitor</h2>
+    <div class="row">
+      <div class="col-lg-6">
+        <div id="plot3"></div>
+      </div>
+      <div class="col-lg-6">
+        <div id="plot4"></div>
+      </div>
+    </div>
+
   </div>
 {% endblock %}
