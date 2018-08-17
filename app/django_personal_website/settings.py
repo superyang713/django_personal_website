@@ -21,8 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'changethesecretkeyhere'
-DISQUS_API_KEY = 'DqTzD3ES6XBdLbS9VRghVK06IolVLCR2B6fKXn8ljil0musd16HVQJ886nE43LjM'
-DISQUS_WEBSITE_SHORTNAME = 'yangdai713'
+DISQUS_API_KEY = 'fsadfjaiosejfioasjeifajsioefja'
+DISQUS_WEBSITE_SHORTNAME = 'sdfawefa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -93,12 +93,6 @@ WSGI_APPLICATION = 'django_personal_website.wsgi.application'
 
 DATABASES = {
     'default': {
-       # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       # 'NAME': 'database1',
-       # 'USER': '',  # <-----------put user name here.
-       # 'PASSWORD': '',  # <-----------put password here.
-       # 'HOST': 'database1',
-       # 'PORT': '5432',
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
