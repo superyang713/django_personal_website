@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'changethesecretkeyhere'
-DISQUS_API_KEY = 'DqTzD3ES6XBdLbS9VRghVK06IolVLCR2B6fKXn8ljil0musd16HVQJ886nE43LjM'
-DISQUS_WEBSITE_SHORTNAME = 'yangdai713'
+SECRET_KEY = os.environ['DJANGO_SECRECT_KEY']
+DISQUS_API_KEY = os.environ['DISQUS_API_KEY']
+DISQUS_WEBSITE_SHORTNAME = os.environ['DISQUS_WEBSITE_SHORTNAME']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     # put web server name here, same as nginx config
@@ -93,14 +93,12 @@ WSGI_APPLICATION = 'django_personal_website.wsgi.application'
 
 DATABASES = {
     'default': {
-       # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       # 'NAME': 'database1',
-       # 'USER': '',  # <-----------put user name here.
-       # 'PASSWORD': '',  # <-----------put password here.
-       # 'HOST': 'database1',
-       # 'PORT': '5432',
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'database1',
+        'USER': os.environ['DATABASE_USER'],
+        'PASSWORD': os.environ['DATABASE_PASSOWRD'],
+        'HOST': 'database1',
+        'PORT': '5432',
     }
 }
 
