@@ -2,9 +2,8 @@
 {% block title %}Yang Dai - Personal Website{% endblock %}
 {% block content %}
 {% load static %}
-<body>
-    <div class="container" align="center">
-        <a href="{% url 'home:about' %}"><img style="max-width:100%;" src="{% static 'home/images/homepage_pic.png' %}"></a>
-    </div>
-</body>
+  <div class="container" align="center">
+    <h1>Chemistry, AI, and Programming</h1>
+    <a href="{% url 'home:about' %}"><img style="max-width:100%;" src="{% static 'home/images/homepage_pic.png' %}"></a>
+  </div>
 {% endblock %}
